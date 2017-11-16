@@ -1,24 +1,26 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {getDestinyPlayer} from './api';
+import {getDestinyPlayer, getDestinyProfile} from './api';
 import express from 'express';
 
 var app = express();
 
+const membershipID = 4611686018467245213;
+const membershipTYPE = 4;
+
 app.get('/account/:membershipType/:displayName', (req, res) => {
   getDestinyPlayer(req.params.membershipType, req.params.displayName, (error, response, body) => {
-    let Account = JSON.parse(body);
-    console.log(Account);
+    let account = JSON.parse(body);
+    console.log(account);
+    console.log(account.Response[0].membershipId);
+    console.log(account.Response[0].membershipType);
+    console.log('NYYYYY CAAAAAAALL');
+    getDestinyProfile(4, "4611686018467245213", (error, response, body) =>{
+      let profile = JSON.parse(body);
+      console.log(profile);
+    })
   });
 });
-
-class App extends React.Component {
-  render () {
-    return <p> Hello friends!</p>;
-  };
-};
-
-render(<App/>, document.getElementById('app'));
 
 app.listen(3000, function(){
   console.log('Server is listening to 3000!')

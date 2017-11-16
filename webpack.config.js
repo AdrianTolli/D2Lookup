@@ -18,7 +18,8 @@ var config = {
         loader : 'babel-loader'
       }
     ]
-  }
+  },
+  target: 'node'
 };
 
 module.exports = config;
